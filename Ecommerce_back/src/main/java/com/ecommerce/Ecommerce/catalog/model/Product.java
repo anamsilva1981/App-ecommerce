@@ -1,10 +1,12 @@
-package com.ecommerce.Ecommerce.entities;
+package com.ecommerce.Ecommerce.catalog.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -15,22 +17,25 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_product;
+    private Integer idProduct;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_subcategory;
+    @ManyToOne
+    @JoinColumn(name = "subcategory_id")
+    private Subcategory subcategory;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idStore;
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     @Column(nullable = false)
     private String name;
 
     @Column
-    private Integer delivery_time;
+    private Integer deliveryTime;
 
     @Column
     private String description;
@@ -42,7 +47,7 @@ public class Product {
     private String feedback;
 
     @Column
-    private String galery;
+    private String gallery;
 
     @Column
     private String image;
@@ -51,7 +56,7 @@ public class Product {
     private String offer;
 
     @Column
-    private String price;
+    private BigDecimal price;
 
     @Column
     private String reviews;
@@ -69,18 +74,6 @@ public class Product {
     private String pet;
 
     @Column
-    private Boolean isActive;
-
-
-    @ManyToOne
-    private Category category;
-
-    @ManyToOne
-    private Subcategory subcategory;
-
-    @ManyToOne
-    private Store store;
-
-
+    private Boolean active;
 
 }
